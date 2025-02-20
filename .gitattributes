@@ -1,1 +1,4 @@
-* linguist-vendored
+venv/ linguist-vendored
+static/ linguist-vendored
+migrations/ linguist-vendored
+templates/ linguist-vendored
