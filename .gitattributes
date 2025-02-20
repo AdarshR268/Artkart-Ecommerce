@@ -1,4 +1,1 @@
-venv/ linguist-vendored
-static/ linguist-vendored
-migrations/ linguist-vendored
-template/ linguist-vendored
+* linguist-vendored
