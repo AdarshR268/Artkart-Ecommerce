@@ -1,0 +1,535 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop</title>
+  <link rel="icon" href="static/images/arts.png" type="image/x-icon">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+
+    body {
+      background-color: #ffffe4;
+    }
+
+    .filter-section {
+        background-color:  #ffffe4;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+      }
+  
+      .filter-heading {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #343a40;
+        border-bottom: 2px solid #dc3545;
+        padding-bottom: 8px;
+      }
+  
+      .filter-group {
+        margin-bottom: 20px;
+      }
+  
+      .filter-group label {
+        font-weight: 500;
+        margin-left: 5px;
+      }
+  
+      .form-range {
+        width: 100%;
+      }
+  
+      .filter-group input {
+        margin-right: 8px;
+      }
+
+      .product-card {
+        margin-bottom: 15px;
+        transition: transform 0.4s;
+        border-radius: 8px;
+        max-width: 90%;
+      }
+      
+      .product-card:hover {
+        transform: scale(1.02);
+      }
+      
+      .product-card img {
+        max-height: 280px; 
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+      }
+      
+      .card {
+        margin-left: 15px;
+        margin-right: 15px;
+        max-height:364px;
+      }
+      
+      .add-wishlist {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: #dc3545;
+        font-size: 1.5rem;
+        display: none;
+      }
+      
+      .product-card:hover .add-wishlist {
+        display: block;
+      }     
+      
+      .rating {
+        margin: 10px 0;
+      }
+
+      .btn {
+        margin-top: 2px;
+        margin-bottom:12px;
+      }
+
+      .navbar {
+        height: 80px; 
+        display: flex; 
+        align-items: center;
+      
+        }
+
+        .logo {
+        font-size: 1.8rem; 
+        color: #000000; 
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+        letter-spacing: 1px; 
+        text-decoration: none;
+        }
+
+        /* Nav Links */
+        .navbar-nav .nav-link {
+        font-size: 1.3rem;
+        color: #000000;
+        padding: 10px;
+        transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+            text-decoration: none; /* Remove default underline */
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #000;
+            transition: width 0.5s ease; /* Slow transition */
+        }
+        
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        
+
+        .navbar-nav .nav-item {
+        margin: 0 15px; 
+        }
+
+        /* Toggler Button */
+        .navbar-toggler {
+        padding: 0.5rem;
+        }
+
+        .navbar-toggler-icon {
+        width: 30px;
+        height: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+        .navbar {
+        height: auto; 
+        padding: 10px;
+        }
+
+        .navbar-nav {
+        flex-direction: column; /* Stack links vertically */
+        }
+
+        .navbar-nav .nav-item {
+        margin: 10px 0;
+        }
+
+        .navbar-collapse {
+        justify-content: center; /* Center items in collapsible menu */
+        }
+        }
+
+        @media (max-width: 576px) {
+        .navbar-nav .nav-link {
+        font-size: 1.1rem;
+        }
+        }
+      
+
+
+      hr {
+        border: none;
+        height: 1px;
+        background-color: #000000;
+        margin: 0;
+      }
+      .breadcrumb {
+          font-size: 14px;
+          color: #000000;
+          margin-top: 25px;
+          margin-bottom: 40px;
+          margin-left: 20px;
+      }
+        
+      .breadcrumb a {
+        text-decoration: none;
+        color: #000000;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .breadcrumb span {
+        font-weight: bold;
+        color: #000;
+      }
+
+      .custom-search-input {
+        height: 40px;
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+      
+      .custom-search-button {
+        height: 36px;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .pagination-container {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      
+      .pagination {
+          list-style: none;
+          padding: 0;
+          display: inline-block;
+      }
+      
+      .pagination li {
+          display: inline;
+          margin: 0 5px;
+      }
+      
+      .pagination a {
+          text-decoration: none;
+          color: #007bff;
+          font-weight: bold;
+          padding: 8px 12px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .pagination a:hover {
+          background-color: #007bff;
+          color: white;
+      }
+
+      .offer-percentage {
+        position: absolute;
+        top: 10px; 
+        left: 9px; 
+        background-color: rgba(255, 0, 0, 0.8);
+        color: white;
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: 100;
+        font-size: 1em; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+        transition: transform 0.3s ease; 
+        z-index: 10; 
+    }
+    
+    .offer-percentage:hover {
+        transform: scale(1.1);
+    }
+  
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg ">
+      <div class="container-fluid">
+        <!-- Left Logo Section -->
+        <a class="logo" href="{% url 'home'%}">ART KART</a>
+    
+        <!-- Toggler Button -->
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- Collapsible Content -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Center Links -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'home'%}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'shop'%}">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about_us'%}">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact_us'%}">Contact</a>
+            </li>
+            {% if not customer %}
+          <li class="nav-item">
+            <a class="nav-link slow-underline" href="{% url 'signup' %}">Signup</a>
+          </li>
+          {% endif %}
+          </ul>
+    
+          <!-- Right Section (Cart, Wishlist, User) -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cart'%}"><i class="bi bi-cart"></i> Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'wishlist'%}"><i class="bi bi-heart"></i> Wishlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile'%}"><i class="bi bi-person"></i> Profile</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+      <hr>
+
+      <!-- Simple Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="{% url "home" %}">Home</a> /
+        <a href="{% url "shop" %}"><span>Shop</span></a>
+      </nav>
+
+      <div class="container mt-4">
+        <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-center">
+          <input 
+            class="form-control custom-search-input me-2 w-50" 
+            type="search" 
+            name="q" 
+            placeholder="Search products..." 
+            value="{{ search_query }}" 
+            aria-label="Search"
+          >
+          <button class="btn btn-outline-success custom-search-button" type="submit">Search</button>
+        </form>
+      </div>
+      
+<!-- Main Content -->
+<div class="container-fluid mt-4">
+  <div class="row">
+
+    <!-- Filters Section -->
+    <div class="col-lg-3 col-md-4">
+      <form action="" method='POST'>
+        {% csrf_token %}
+        <div class="filter-section">
+          <h3 class="filter-heading">Filters</h3>
+
+          <div class="button-container">
+            <button type="submit" class="btn btn-danger w-90">Apply Filters</button>
+            <a href="{% url 'shop' %}" class="btn btn-secondary">Reset</a> 
+          </div>
+
+          <hr>
+          
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <h5>Category</h5>
+            {% for i in arts %}
+            <div class="form-check">
+              <input 
+              class="form-check-input"
+              type="checkbox"
+              name="categories"
+              id="cat{{ forloop.counter }}" 
+              value="{{ i.id }}">
+              {% comment %} {% if i.id|stringformat:"s" in selected_ids %}checked{% endif %}>  <!-- Keep checked if selected --> {% endcomment %}
+              <label class="form-check-label" for="cat{{ forloop.counter }}">{{ i.art_type }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          <hr>
+          <!-- Size Filter -->
+          <div class="filter-group">
+            <h5>Size</h5>
+            {% for size in variants %}
+            <div class="form-check">
+              <input 
+              class="form-check-input"
+              type="checkbox"
+              name="size"
+              id="cat{{ forloop.counter }}"
+              value="{{ size.id }}">
+              <label class="form-check-label" for="cat{{ forloop.counter }}">{{size.frame_size}}</label>
+            </div>
+            {% endfor %}
+          </div>
+          <hr>
+        <!-- Price Filter -->
+        <div class="filter-group">
+          <h5>Filter Price</h5>
+          <ul class="list-unstyled">
+            <li><input type="radio" name="price_order" value="asc" id="price1"><label for="price1">LOW TO HIGH</label></li>
+            <li><input type="radio" name="price_order" value="desc" id="price2"><label for="price2">HIGH TO LOW</label></li>
+          </ul>
+      </div>
+        </form>
+      </div>
+      </div>
+
+    <div class="col-lg-9 col-md-8">
+      {% if no_products_found %}
+        <p class="text-center text-danger">No items found matching these filters !</p>
+      {% else %}
+        <div class="row g-3"> <!-- Add 'g-3' class to manage spacing between cards -->
+          {% for product in products %}
+            
+          <!-- Product Card 1 -->
+          <div class="col-lg-4 col-md-6 col-sm-12 product-card">
+            <div class="card">
+              <a href="{% url 'single' product.id product.variants.first.id %}"><img src="{{product.images1.url}}" class="card-img-top" alt="Loading"></a>
+              <div class="card-body" style="padding-bottom: 0px;">
+                <h6 class="card-title">{{product.product_name}}</h6>
+                <a href="{% url 'add_wishlist' product.id product.variants.first.id %}"><button class="add-wishlist" title="Add to Wishlist"><i class="fas fa-heart"></i></button></a>
+              </div>
+
+              {% if product.art_category.art_type_offer != 0 %}
+              <span class="offer-percentage" style="position: absolute; top: 10px; left: 8px; background-color: rgba(255, 0, 0, 0.7); color: white; padding: 5px; border-radius: 5px;">
+                {{ product.art_category.art_type_offer }}% OFF
+              </span>
+              {% endif %}
+            </div>
+            
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="pagination-container">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li><a href="?page=1">&laquo; First</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+      
+          <li class="current-page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>
+      
+          {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      
+<!-- Footer Section Start -->
+<footer class="bg-dark text-white mt-5 pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>About Us</h5>
+        <p>We are a team dedicated to providing the best products and services for our customers.</p>
+        <p>&copy; 2025 Artkart</p>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4 text-end">
+        <h5 class="mt-4">Follow Us</h5>
+        <div>
+          <a href="https://www.youtube.com/@art-N-craft-by-achus" class="text-white me-2"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.instagram.com/_art_canva/" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Footer Section End -->
+      
+      
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Check for Django messages and display them using SweetAlert
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' or message.tags == 'warning' or message.tags == 'error' %}
+                Swal.fire({
+                    icon: "{{ message.tags }}", // Directly uses 'success' or 'warning'
+                    title: "{{ message|escapejs }}",
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'small-alert-popup'
+                    }
+                });
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</script>
+
+<script>
+  const priceRange = document.getElementById('priceRange');
+  const priceValue = document.getElementById('priceValue');
+
+  priceRange.addEventListener('input', () => {
+    priceValue.textContent = priceRange.value;
+  });
+
+</script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+</html>

@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Input Page</title>
+  <style>
+    /* Reset some default styles for better consistency */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Full-page layout and alignment */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #DEAD6F;
+    }
+
+    /* Styling the container */
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    /* Heading styling */
+    h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    /* Input groups */
+    .input-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    /* Labels */
+    .input-group label {
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    /* Inputs */
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    /* Button styling */
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0984e3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Button hover effect */
+    button:hover {
+      background-color: #74b9ff;
+    }
+
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      input {
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Password Verification</h2>
+    <form>
+      <div class="input-group">
+        <label for="password1">Enter Password:</label>
+        <input type="password" id="password1" placeholder="Enter your password" required>
+      </div>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+
+
+
+
+
+cart details  html  
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #ffffe4;
+        }
+        .cart-container {
+            margin-top: 30px;
+        }
+
+        .cart-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffe4;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .cart-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .item-details h5 {
+            font-weight: bold;
+        }
+
+        .item-details .price {
+            color: #000000;
+            font-size: 19px;
+        }
+
+        {% comment %} .item-details .original-price {
+            text-decoration: line-through;
+            margin-left: 10px;
+            color: #999;
+        } {% endcomment %}
+
+        .summary {
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            /* Make the summary sticky */
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary h5 {
+            color: #e67e22;
+        }
+
+        .btn-order {
+            background-color:#DEAD6F;
+            color: white;
+        }
+
+        .btn-order:hover {
+            background-color: #947957;
+            color: white;
+        }
+
+        /* Adjust quantity input field width */
+        .quantity input {
+            width: 60px; /* Smaller width for a compact look */
+            text-align: center;
+        }
+
+        /* Limit the height of the cart items section for better scrolling */
+        .cart-items {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 15px; /* Prevents the scroll bar from overlapping content */
+        }
+        /* Custom navbar height */
+        .navbar {
+            height: 80px; /* Adjust the height as needed */
+            
+
+        }
+
+        .logo {
+            font-size: 1.8rem; /* Increase logo size */
+            color: #000000; /* Logo color */
+            font-weight: bold; /* Make the logo bold */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            letter-spacing: 1px; /* Increase letter spacing */
+            text-decoration: none;
+        }
+        
+        .navbar-nav .nav-link {
+            font-size: 1.3rem; /* Optional: Increase font size for links */
+            color:#000000
+            }
+
+
+
+        .navbar-nav .nav-item {
+            margin: 0 15px; /* Add horizontal margin between links */
+        }
+        
+        .navbar-nav .nav-link {
+            padding: 10px; /* Optional: Adjust padding for links */
+        }
+        
+        .navbar-toggler {
+            padding: 0.5rem; /* Adjust padding for the toggler button */
+            }
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #000000;
+            margin: 0;
+            }
+
+            .popup-message {
+                position: fixed;
+                top: -100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #FFDE21;
+                color: White;
+                padding: 20px 35px;
+                border-radius: 6px;
+                z-index: 1000;
+                transition: top 0.5s ease-in-out;
+                box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+                font-family: Arial, sans-serif;
+            }
+            .popup-error {
+                background-color: #f44336;
+            }
+            .popup-warning {
+                background-color: #ff9800;
+            }
+            .popup-show {
+                top: 25px;
+            }
+
+            .cart-header {
+                text-align: center; /* Centers the text horizontally */
+                margin-top: 20px; /* Optional: Adds some space from the top */
+            }
+        
+            .cart-header h2 {
+                font-weight: 600;
+                margin-bottom: 20px; /* Keeps consistent spacing with mb-4 */
+            }
+
+            
+
+    </style>
+</head>
+<body>
+    <div id="popup-message" class="popup-message"></div>
+    <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container-fluid">
+
+      <!-- Left Logo Section -->
+      <a class="logo" href="#">ART KART</a>
+
+      <!-- Center Links -->
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav navbar-nav-center">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'home'%}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'shop'%}">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Signup</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right Section (Cart, Wishlist, User) -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart'%}"><i class="bi bi-cart"></i> Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'wishlist'%}"><i class="bi bi-heart"></i> Wishlist</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile'%}"><i class="bi bi-person"></i> User</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <hr>
+
+    <!-- Cart Section -->
+    <div class="container cart-container">
+        
+        <div class="cart-header">
+            <h2 class="mb-4">CART</h2>
+        </div>
+
+        {% if is_empty %}
+        <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 400px;">
+            <h4>Your cart is empty !</h4>
+            <form method="GET" action="{% url 'shop' %}">  <!-- Replace 'shop' with your actual shop URL -->
+                <button type="submit" class="btn btn-order w-100 mt-3">SHOP NOW</button>
+            </form>
+        </div>
+    
+{% else %}
+
+        <div class="row">
+            <div class="col-lg-8 cart-items">
+                {% for item in cart_items %}
+                <div class="cart-item d-flex align-items-center">
+                    <img src="{{ item.product.images1.url }}" alt="Painting">
+                    <div class="item-details ms-3 flex-grow-1">
+                        <h5>{{ item.product.product_name }}</h5>
+                        <p>Frame Size: {{ item.variant.frame_size }}</p>
+                        <p class="price" data-price="{{ item.variant.price }}">₹ {{ item.variant.price }}</p>
+            
+                        <div class="quantity d-flex align-items-center mt-2">
+                            <button class="btn btn-outline-secondary btn-sm me-2 minus" type="button">-</button>
+                            <input 
+                                type="number" 
+                                value="{{ item.quantity }}" 
+                                min="1" 
+                                class="form-control form-control-sm quantity-input" 
+                                name="quantity_{{ item.variant.id }}" 
+                                data-price="{{ item.variant.price }}"
+                                data-stock="{{ item.variant.stock }}">
+                            <button class="btn btn-outline-secondary btn-sm ms-2 plus" type="button">+</button>
+                        </div>
+                    </div>
+            
+                    <a href="{% url 'remove_cart_item' item.variant.id %}" class="btn btn-danger btn-sm remove-item">Remove</a>
+                </div>
+                {% endfor %}
+            </div>
+    
+            <div class="col-lg-4">
+                <div class="summary">
+                    <form method="POST" action="{% url 'checkout_og' %}" id="checkout-form">
+                        {% csrf_token %}
+    
+                        <p>Total price: <span id="total-price"></span></p>
+                        <input type="hidden" name="total_price" id="total-price-input">
+    
+                        <button type="submit" class="btn btn-order w-100 mt-3">PROCEED TO CHECKOUT</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    
+
+
+
+
+    
+
+
+    <script>
+       // Function to update the total price based on quantity changes
+function updateTotalPrice() {
+    let total = 0;
+    document.querySelectorAll('.cart-item').forEach(item => {
+        const price = parseFloat(item.querySelector('.price').dataset.price);
+        const quantity = parseInt(item.querySelector('.quantity-input').value);
+        total += price * quantity; // Calculate total based on current quantities
+    });
+    return total; // Return the calculated total
+}
+
+// Function to display the total amount
+function displayTotalAmount() {
+    const totalAmount = updateTotalPrice(); // Get the updated total amount
+    document.getElementById('total-price').textContent = `₹ ${totalAmount}`; // Update total display
+    document.getElementById('total-price-input').value = totalAmount; // Update hidden input for form submission
+}
+
+// Handle plus button clicks
+document.querySelectorAll('.plus').forEach(button => {
+    button.addEventListener('click', function () {
+        const input = this.previousElementSibling; // Get the input element
+        let quantity = parseInt(input.value); // Get the current quantity
+        const stock = parseInt(input.getAttribute('data-stock')); // Get the stock value
+
+        // Check if quantity can be incremented
+        if (quantity < stock) {
+            input.value = quantity + 1; // Increment the quantity
+            displayTotalAmount(); // Update total amount after changing quantity
+        } else {
+            alert('Quantity cannot exceed available stock.'); // Alert if exceeding stock
+        }
+    });
+});
+
+// Handle minus button clicks
+document.querySelectorAll('.minus').forEach(button => {
+    button.addEventListener('click', function () {
+        const input = this.nextElementSibling; // Get the input element
+        let quantity = parseInt(input.value); // Get the current quantity
+
+        // Check if quantity can be decremented
+        if (quantity > 1) {
+            input.value = quantity - 1; // Decrement the quantity
+            displayTotalAmount(); // Update total amount after changing quantity
+        } else {
+            alert('Quantity cannot be less than 1.'); // Alert if trying to go below 1
+        }
+    });
+});
+
+// Prevent invalid input values
+document.querySelectorAll('.quantity-input').forEach(input => {
+    input.addEventListener('input', function () {
+        const stock = parseInt(this.getAttribute('data-stock'));
+        if (this.value < 1) {
+            alert('Quantity cannot be less than 1.');
+            this.value = 1; // Reset to 1
+        } else if (this.value > stock) {
+            alert('Quantity cannot exceed available stock.');
+            this.value = stock; // Reset to max stock
+        }
+        displayTotalAmount(); // Update total amount after input change
+    });
+});
+
+// Call this function to initialize the total amount display on page load
+displayTotalAmount();
+
+
+    // Function to show the popup message
+    function showPopup(message, type) {
+        const popup = document.getElementById('popup-message');
+        popup.textContent = message;
+        popup.className = `popup-message popup-${type} popup-show`;
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+            popup.className = 'popup-message';
+        }, 3000);
+    }
+
+    // Check for Django messages and display them
+    {% if messages %}
+        {% for message in messages %}
+            showPopup("{{ message }}", "{{ message.tags }}");
+        {% endfor %}
+    {% endif %}
+
+
+    </script>
+    
+<script 
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+
+</body>
+</html>
+
+
+
+
+cart details view
+
+
+
+def checkout_og(request):
+    if request.method == 'POST':
+        total_price = request.POST.get('total_price')
+        quantities = {
+            key.split('_')[1]: int(value)
+            for key, value in request.POST.items()
+            if key.startswith('quantity_')
+        }
+
+        print('QUANTITY:', quantities)
+
+        for variant_id, quantity in quantities.items():
+            variant = get_object_or_404(Variant, id=variant_id)
+
+            if quantity < 1:
+                messages.error(request, "Quantity cannot be less than 1.")
+                return redirect('cart')
+            
+            if quantity > 10:  # Check for maximum purchase limit
+                messages.error(request, "Purchase quantity cannot exceed 10.")
+                return redirect('cart')
+            
+            if quantity > variant.stock:
+                messages.error(request, f"Only {variant.stock} items available for {variant.product.product_name}.")
+                return redirect('cart')
+            
+            cart_item = get_object_or_404(Cart, user=request.user, variant_id=variant_id)
+            cart_item.quantity = quantity
+            print('QUANTITY:',quantity )
+
+            request.session['quantity'] = quantity
+            cart_item.save()
+            request.session['quantity'] = quantity
+        request.session['total_price'] = total_price
+        return redirect('checkout')
+    return redirect('cart')
+
+
+
+   ========================= ADMIN SIDE VARIANTS SECTIONS ===================
+
+   {% extends "admin/sidebar.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Kart Dashboard</title>
+    <style>
+        main {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #f0f2f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .header input {
+            padding: 10px;
+            width: 250px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .add-btn {
+            padding: 10px 20px;
+            background-color: #00b894;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background-color: #009970;
+        }
+
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid #2d3436;
+        }
+
+        .product-table th, .product-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #2d3436;
+        }
+
+        .product-table th {
+            background-color: #f4f4f4;
+        }
+
+        .product-table td {
+            font-size: 15px;
+            color: #2d3436;
+        }
+
+        .action-btn, .deactivate-btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .activate-btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #46923c;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .action-btn {
+            background-color: #0984e3;
+            color: white;
+        }
+
+        .action-btn:hover {
+            background-color: #006bb5;
+        }
+
+        .deactivate-btn {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .deactivate-btn:hover {
+            background-color: #b21719;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .save-btn {
+            padding: 10px 20px;
+            background-color: #00b894;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .save-btn:hover {
+            background-color: #009970;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Main content -->
+        <main>
+            <div class="header">
+                <h1>TYPES OF VERIANTS</h1>
+                <input type="text" placeholder="Search...">
+                <button class="add-btn" id="openModalBtn">ADD NEW VERIANT</button>
+            </div>
+           
+            <table class="product-table">
+                <thead>
+                    <tr>
+
+                        <th></th>
+                        <th>VERIANT ID</th>
+                        <th>SIZE(inches)</th>
+                        <th>PRICE</th>
+                        <th>STOCK</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for variant in variants %}
+                    <tr>
+                        <td></td>
+                        <td>{{ variant.id }}</td>
+                        <td>{{ variant.frame_size}}</td>
+                        <td>{{ variant.price}}</td>
+                        <td>{{ variant.stock}}</td>
+
+                        <td>
+                            <button class="action-btn edit-btn">EDIT</button>
+                            {% if variant.variant_status%}
+                            <a href="{% url 'variant_app:variant_status' variant.id variant.product.id %}"><button class="deactivate-btn">DEACTIVATE</button></a>
+                            {% else %}
+                            <a href="{% url 'variant_app:variant_status' variant.id variant.product.id %}"><button class="activate-btn">ACTIVATE</button></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                   
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <div id="veriantModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="variantForm" method="POST">
+                {% csrf_token %} 
+                <div class="modal-header">
+                    <h2 id="modal-title">Add Product Variant</h2>
+                </div>
+                <div class="modal-body">
+                    <label for="size">Size (inches):</label>
+                    <input type="text" name="size" placeholder="Enter size" required>
+    
+                    <label for="price">Price:</label>
+                    <input type="number" name="price" placeholder="Enter Price" required>
+    
+                    <label for="stock">Stock:</label>
+                    <input type="number" name="stock" placeholder="Enter stock" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="save-btn" id="modal-save-btn">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+      
+        var modal = document.getElementById("veriantModal");
+        var btn = document.getElementById("openModalBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function() {
+            modal.style.display = "block";
+            document.getElementById("variant-id").value = "";
+            document.getElementById("size").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("stock").value = "";
+        }
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        var editButtons = document.querySelectorAll(".edit-btn");
+
+        editButtons.forEach(function(editBtn) {
+            editBtn.onclick = function() {
+                var row = editBtn.closest("tr");
+                var variantId = row.cells[1].textContent;
+                var size = row.cells[2].textContent;
+                var price = row.cells[3].textContent;
+                var stock = row.cells[4].textContent;
+                modal.style.display = "block";
+                document.getElementById("variant-id").value = variantId;
+                document.getElementById("size").value = size;
+                document.getElementById("price").value = price;
+                document.getElementById("stock").value = stock;
+            };
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}
+
+
+#========================  PRODUCT ADD SECTION =========================#
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f4f8;
+      font-family: 'Arial', sans-serif;
+    }
+    .form-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 25px;  /* Reduced padding to decrease height */
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 20px; /* Reduced margin */
+    }
+    .form-header h2 {
+      color: #4a4a4a;
+      font-size: 22px; /* Slightly smaller font size */
+      font-weight: bold;
+    }
+    .btn-custom {
+      background-color: #6c63ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .btn-custom:hover {
+      background-color: #574b90;
+    }
+    .form-control, .form-select {
+      border-radius: 8px;
+      height: 40px;  /* Reduced input height */
+    }
+    textarea.form-control {
+      height: 100px;  /* Reduced height of textarea */
+    }
+    .sweet-alert {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: 300px;
+      height: 30px;
+      border-radius: 10px;
+      padding: 20px;
+      border: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
+      background: linear-gradient(145deg, #f0f4f8, #e0e7ee); 
+      text-align: center;
+      animation: slideDown 0.5s ease;
+  }
+  
+  /* Adding slide-down animation */
+  @keyframes slideDown {
+      from {
+          opacity: 0;
+          transform: translate(-50%, -20px);
+      }
+      to {
+          opacity: 1;
+          transform: translate(-50%, 0); 
+      }
+  }
+  
+  .message-box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .alert-info {
+      color: #007bff;
+      font-weight: bold;
+  }
+  
+  .alert-button {
+      margin-top: 20px; /* Space above button */
+      padding: 10px 20px; /* Padding for button */
+      border: none; /* Remove border */
+      border-radius: 5px; /* Rounded corners for button */
+      background-color: #007bff; /* Button color */
+      color: white; /* Button text color */
+      cursor: pointer; /* Change cursor to pointer */
+      transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  .alert-button:hover {
+      background-color: #0056b3; /* Darker button on hover */
+  }
+  </style>
+</head>
+<body>
+            {% if messages %}
+            <div class="sweet-alert">
+                <div class="alert alert-info message-box" role="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                 {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+  <div class="form-container">
+    <div class="form-header">
+      <h2>Add New Product</h2>
+    </div>
+    <form method="POST" enctype="multipart/form-data" action = {% url 'add_product'%}>
+      {% csrf_token %}
+      <!-- Product Info Fields -->
+      <div class="mb-3">
+        <label for="product-name" class="form-label">Product Name</label>
+        <input type="text" class="form-control" name = 'product_name' id="product-name" placeholder="Enter product name">
+      </div>
+      <div class="mb-3">
+        <label for="paint-type" class="form-label">Paint Type</label>
+        <select class="form-select" id="paint-type" name = 'paint_type'>
+          <option selected>Select Paint Type</option>
+          {% for paint in paints %}
+          <option value="{{paint.id}}">{{paint.paint_type}}</option>
+          {% endfor%}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select class="form-select" id="category" name = 'category_name'>
+          <option selected>Select Category</option>
+          {% for art in arts %}
+          <option value="{{art.id}}">{{art.art_type}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="description"  class="form-label">Description</label>
+        <textarea class="form-control" name='description' id="description" placeholder="Enter product description"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="image1" class="form-label">Product Image 1</label>
+        <input type="file" class="form-control" id="image1" name="image1" accept="image/*">
+        <small class="form-text text-muted">Only images are allowed (e.g., PNG, JPG).</small>
+      </div>
+      <div class="mb-3">
+        <label for="image2" class="form-label">Product Image 2</label>
+        <input type="file" class="form-control" id="image2" name="image2" accept="image/*">
+        <small class="form-text text-muted">Only images are allowed (e.g., PNG, JPG).</small>
+      </div>
+      <div class="mb-3">
+        <label for="image3" class="form-label">Product Image 3</label>
+        <input type="file" class="form-control" id="image3" name="image3" accept="image/*">
+        <small class="form-text text-muted">Only images are allowed (e.g., PNG, JPG).</small>
+      </div>
+      
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-custom">Add Product</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!validImageTypes.includes(file.type)) {
+          alert('Only image files (JPEG, PNG, GIF) are allowed!');
+          event.target.value = ''; // Clear the input field
+        }
+      }
+    });
+  });
+  
+</script>
+
+</body>
+</html>  
+
+
+#=======================  USER HOME PAGE ============================#
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artkart</title>
+  <link rel="icon" href="static/images/arts.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+
+    body{
+      background-color:#ffffe4
+    }
+
+    .navbar {
+      height: 80px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      color: #000000; 
+      font-weight: bold; 
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+      letter-spacing: 1px; 
+      text-decoration: none;
+  }
+  
+    .navbar-nav .nav-link {
+      font-size: 1.3rem; 
+      color:#000000
+    }
+
+    .navbar-nav .nav-item {
+      margin: 0 15px; 
+    }
+  
+    .navbar-toggler {
+      padding: 0.5rem;
+    }
+
+    .carousel-item {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    video {
+      width: 100vw; 
+      height: auto; 
+      object-fit: cover; 
+    }
+
+    .popular-products {
+      margin-top: 50px; 
+      text-align: left; 
+    }
+
+    .new-arrivals {
+      margin-top: 50px; 
+      text-align: center;
+    }
+
+    .new-arrivals-heading {
+        font-size: 2.5rem;
+        color: #5B534F; 
+        font-weight: bold; 
+        margin-bottom: 10px;
+    }
+
+    .new-arrivals p {
+        font-size: 1.25rem; 
+        color: #6c757d; 
+    }
+    .card {
+      
+      width: 90%; 
+      margin: 0 auto;
+    }
+
+    .small-card {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    #card_image_arrival{
+      height:310px ;
+    }
+      
+
+    #card_image_popular{
+        height:243px ;
+      }
+        
+    .quotes-section {
+      background-color: #f8f9fa;
+      padding: 30px;
+      background-color:#ffffe4
+    }
+
+    .quotes-section h3 {
+        color: #343a40; 
+    }
+
+    .quotes-section blockquote {
+        padding-left: 15px; 
+        margin-bottom: 20px;
+        font-style: italic;
+        color: #6c757d;
+    }
+
+    .slow-underline {
+      position: relative;
+      color: inherit;
+      text-decoration: none;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .slow-underline::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 90%;
+      height: 1px;
+      background-color: currentColor;
+      transform: scaleX(0); 
+      transition: transform 0.4s ease-in-out;
+      transform-origin: left; 
+    }
+
+    .slow-underline:hover::after {
+      transform: scaleX(1);
+    }
+
+    .view{
+      text-decoration:none;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMKtkz0p5sy4R8l1L4/fC1RfwD1kLwL4RbfE8" crossorigin="anonymous">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container-fluid">
+
+  <!-- Left Logo Section -->
+      <a class="logo" href="{% url 'home'%}">ART CANVA</a>
+
+  <!-- Center Links -->
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav navbar-nav-center">
+          <li class="nav-item">
+            <a class="nav-link slow-underline" aria-current="page" href="{% url 'home'%}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link slow-underline" href="{% url 'shop'%}">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link slow-underline" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link slow-underline" href="{% url 'signup' %}">Signup</a>
+          </li>
+        </ul>
+      </div>
+
+  <!-- Right Section (Cart, Wishlist, User) -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart' %}"><i class="bi bi-cart"></i> Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'wishlist'%}"><i class="bi bi-heart"></i> Wishlist</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile'%}"><i class="bi bi-person"></i> Profile</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+<!-- Navbar End -->
+
+
+<!-- Carousel Start -->
+  <div id="staticCarousel" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <video autoplay loop muted>
+          <source src="{% static 'images/video.mp4' %}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+<!-- Carousel End -->
+
+
+<!-- New Arrivals Section Start -->
+<div class="container my-5 new-arrivals">
+  <h2 class="new-arrivals-heading">NEW ARRIVALS</h2>
+  <hr class="my-4">
+  <p class="lead">Discover our latest products that just hit the shelves!</p>
+</div>
+<!-- New Arrivals Section End -->
+
+
+<!-- Card Section Start -->
+  <div class="container my-5">
+    <div class="row">
+      {% for arrival in arrivals %}
+      <div class="col-md-4">
+        <div class="card">
+          <img src="{{ arrival.images1.url }}" id="card_image_arrival" class="card-img-top" alt="Card Image">
+          <div class="card-body">
+            <h5 class="card-title">{{arrival.product_name}}</h5>
+            <p class="card-text">{{arrival.}}</p>
+            <a href="{% url 'single' arrival.id arrival.variants.first.id %}" ><button type="button" class="btn btn-primary btn-sm">View</button></a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+<!-- Card Section End -->
+
+
+<!-- Popular Products Section -->
+   <div class="container my-5 popular-products">
+    <h2>| POPULAR PRODUCTS</h2>
+  </div>
+
+<!-- Smaller Card Section Start -->
+  <div class="container my-5">
+    <div class="row">
+    {% for popular in populars %}
+      <div class="col-md-3">
+        <div class="card small-card">
+          <img src="{{popular.images1.url}}" id="card_image_popular" class="card-img-top" alt="Small Card Image 1">
+          <div class="card-body">
+            <h6 class="card-title">{{popular.product_name}}</h6>
+            <a href="" class="view">VIEW></a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+<!-- Smaller Card Section End -->
+
+
+<!-- Quotes Section Start -->
+<div class="container my-5 quotes-section text-center">
+  <h3 class="mb-4">The Essence of Painting</h3>
+  <blockquote class="blockquote">
+      <p class="mb-0">"Painting is the silent dialogue of the soul, capturing emotions where words fall short”</p>  
+  </blockquote>
+
+  <blockquote class="blockquote">
+      <p class="mb-0">“It is a timeless expression that invites us to see the world through the artist's heart."</p>
+  </blockquote>
+</div>
+<!-- Quotes Section End -->
+
+
+<!-- Footer Section Start -->
+<footer class="bg-dark text-white mt-5 pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>About Us</h5>
+        <p>We are a team dedicated to providing the best products and services for our customers.</p>
+        <p>&copy; 2024 Artcanva</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white">Home</a></li>
+          <li><a href="#" class="text-white">About</a></li>
+          <li><a href="#" class="text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 text-end">
+        <h6>Subscribe to Our Newsletter</h5>
+        <form class="d-flex justify-content-end mt-3">
+          <input type="email" class="form-control me-2" placeholder="Enter your email" aria-label="Email" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <h5 class="mt-4">Follow Us</h5>
+        <div>
+          <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Footer Section End -->
+
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMKtkz0p5sy4R8l1L4/fC1RfwD1kLwL4RbfE8" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"rel="stylesheet">
+  
+</body>
+</html>
+
+
+
+#======================== USER SHOP PAGE =============================#
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop</title>
+  <link rel="icon" href="static/images/arts.png" type="image/x-icon">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+
+    body {
+      background-color: #ffffe4;
+    }
+
+    .filter-section {
+        background-color:  #ffffe4;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+      }
+  
+      .filter-heading {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #343a40;
+        border-bottom: 2px solid #dc3545;
+        padding-bottom: 8px;
+      }
+  
+      .filter-group {
+        margin-bottom: 20px;
+      }
+  
+      .filter-group label {
+        font-weight: 500;
+        margin-left: 5px;
+      }
+  
+      .form-range {
+        width: 100%;
+      }
+  
+      .filter-group input {
+        margin-right: 8px;
+      }
+
+      .product-card {
+        margin-bottom: 15px;
+        transition: transform 0.4s;
+        border-radius: 8px;
+        max-width: 90%;
+      }
+      
+      .product-card:hover {
+        transform: scale(1.02);
+      }
+      
+      .product-card img {
+        max-height: 280px; 
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+      }
+      
+      .card {
+        margin-left: 15px;
+        margin-right: 15px;
+        max-height:364px;
+      }
+      
+      .add-wishlist {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: #dc3545;
+        font-size: 1.5rem;
+        display: none;
+      }
+      
+      .product-card:hover .add-wishlist {
+        display: block;
+      }     
+      
+      .rating {
+        margin: 10px 0;
+      }
+
+      .btn {
+        margin-top: 2px;
+        margin-bottom:12px;
+      }
+
+      .navbar {
+          height: 80px; 
+      }
+
+      .logo {
+          font-size: 1.8rem; 
+          color: #000000; 
+          font-weight: bold; 
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+          letter-spacing: 1px; 
+          text-decoration: none;
+      }
+    
+      .navbar-nav .nav-link {
+        font-size: 1.3rem;
+        color:#000000
+      }
+
+      .navbar-nav .nav-item {
+          margin: 0 15px; 
+      }
+      
+      .navbar-nav .nav-link {
+          padding: 10px;
+      }
+      
+      .navbar-toggler {
+          padding: 0.5rem; 
+      }
+
+      hr {
+        border: none;
+        height: 1px;
+        background-color: #000000;
+        margin: 0;
+      }
+      .breadcrumb {
+          font-size: 14px;
+          color: #000000;
+          margin-top: 25px;
+          margin-bottom: 40px;
+          margin-left: 20px;
+      }
+        
+      .breadcrumb a {
+        text-decoration: none;
+        color: #000000;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .breadcrumb span {
+        font-weight: bold;
+        color: #000;
+      }
+
+      .custom-search-input {
+        height: 40px;
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+      
+      .custom-search-button {
+        height: 36px;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .pagination-container {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      
+      .pagination {
+          list-style: none;
+          padding: 0;
+          display: inline-block;
+      }
+      
+      .pagination li {
+          display: inline;
+          margin: 0 5px;
+      }
+      
+      .pagination a {
+          text-decoration: none;
+          color: #007bff;
+          font-weight: bold;
+          padding: 8px 12px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .pagination a:hover {
+          background-color: #007bff;
+          color: white;
+      }
+  
+      .popup-message {
+          position: fixed;
+          top: -100px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #FFDE21; 
+          color: #000000;
+          padding: 20px 35px;
+          border-radius: 6px;
+          z-index: 1000;
+          transition: top 0.5s ease-in-out;
+          box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+          font-family: Arial, sans-serif;
+      }
+
+      .popup-error {
+          background-color: #f44336;
+      }
+
+      .popup-warning {
+          background-color: #ff9800; 
+      }
+
+      .popup-show {
+          top: 25px;
+      }
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div id="popup-message" class="popup-message"></div>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+    
+          <a class="logo" href="#">ART KART</a>
+    
+          <!-- Center Links -->
+          <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-center">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'home'%}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'shop'%}">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+              </li>
+            </ul>
+          </div>
+    
+          <!-- Right Section (Cart, Wishlist, User) -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cart'%}"><i class="bi bi-cart"></i> Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'wishlist'%}"><i class="bi bi-heart"></i> Wishlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile'%}"><i class="bi bi-person"></i> Profile</a>
+            </li>
+          </ul>
+    
+        </div>
+      </nav>
+      <!-- Navbar End -->
+    
+      <hr>
+
+      <!-- Simple Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="{% url "home" %}">Home</a> /
+        <a href="{% url "shop" %}"><span>Shop</span></a>
+      </nav>
+
+      <div class="container mt-4">
+        <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-center">
+          <input 
+            class="form-control custom-search-input me-2 w-50" 
+            type="search" 
+            name="q" 
+            placeholder="Search products..." 
+            value="{{ search_query }}" 
+            aria-label="Search"
+          >
+          <button class="btn btn-outline-success custom-search-button" type="submit">Search</button>
+        </form>
+      </div>
+      
+<!-- Main Content -->
+<div class="container-fluid mt-4">
+  <div class="row">
+
+    <!-- Filters Section -->
+    <div class="col-lg-3 col-md-4">
+      <form action="" method='POST'>
+        {% csrf_token %}
+        <div class="filter-section">
+          <h3 class="filter-heading">Filters</h3>
+
+          <div class="button-container">
+            <button type="submit" class="btn btn-danger w-90">Apply Filters</button>
+            <a href="{% url 'shop' %}" class="btn btn-secondary">Reset</a> 
+          </div>
+
+          <hr>
+          
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <h5>Category</h5>
+            {% for i in arts %}
+            <div class="form-check">
+              <input 
+              class="form-check-input"
+              type="checkbox"
+              name="categories"
+              id="cat{{ forloop.counter }}" 
+              value="{{ i.id }}">
+              {% comment %} {% if i.id|stringformat:"s" in selected_ids %}checked{% endif %}>  <!-- Keep checked if selected --> {% endcomment %}
+              <label class="form-check-label" for="cat{{ forloop.counter }}">{{ i.art_type }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          <hr>
+          <!-- Size Filter -->
+          <div class="filter-group">
+            <h5>Size</h5>
+            {% for size in variants %}
+            <div class="form-check">
+              <input 
+              class="form-check-input"
+              type="checkbox"
+              name="size"
+              id="cat{{ forloop.counter }}"
+              value="{{ size.id }}">
+              <label class="form-check-label" for="cat{{ forloop.counter }}">{{size.frame_size}}</label>
+            </div>
+            {% endfor %}
+          </div>
+          <hr>
+        <!-- Price Filter -->
+        <div class="filter-group">
+          <h5>Filter Price</h5>
+          <ul class="list-unstyled">
+            <li><input type="radio" name="price_order" value="asc" id="price1"><label for="price1">LOW TO HIGH</label></li>
+            <li><input type="radio" name="price_order" value="desc" id="price2"><label for="price2">HIGH TO LOW</label></li>
+          </ul>
+      </div>
+        </form>
+      </div>
+      </div>
+
+ 
+
+    <div class="col-lg-9 col-md-8">
+      {% if no_products_found %}
+        <p class="text-center text-danger">No items found matching these filters !</p>
+      {% else %}
+        <div class="row g-3"> <!-- Add 'g-3' class to manage spacing between cards -->
+          {% for product in products %}
+            
+          <!-- Product Card 1 -->
+          <div class="col-lg-4 col-md-6 col-sm-12 product-card">
+            <div class="card">
+              <a href="{% url 'single' product.id product.variants.first.id %}"><img src="{{product.images1.url}}" class="card-img-top" alt="Loading"></a>
+              <div class="card-body" style="padding-bottom: 0px;">
+                <h6 class="card-title">{{product.product_name}}</h6>
+                <a href="{% url 'add_wishlist' product.id product.variants.first.id %}"><button class="add-wishlist" title="Add to Wishlist"><i class="fas fa-heart"></i></button></a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="pagination-container">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li><a href="?page=1">&laquo; First</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+      
+          <li class="current-page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>
+      
+          {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      
+<!-- Footer Section Start -->
+<footer class="bg-dark text-white mt-5 pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>About Us</h5>
+        <p>We are a team dedicated to providing the best products and services for our customers.</p>
+        <p>&copy; 2024 Your Company</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white">Home</a></li>
+          <li><a href="#" class="text-white">About</a></li>
+          <li><a href="#" class="text-white">Services</a></li>
+          <li><a href="#" class="text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 text-end">
+        <h5>Subscribe to Our Newsletter</h5>
+        <form class="d-flex justify-content-end mt-3">
+          <input type="email" class="form-control me-2" placeholder="Enter your email" aria-label="Email" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <h5 class="mt-4">Follow Us</h5>
+        <div>
+          <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Footer Section End -->
+      
+      
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Function to show the popup message
+  function showPopup(message, type) {
+      const popup = document.getElementById('popup-message');
+      popup.textContent = message;
+      popup.className = `popup-message popup-${type} popup-show`;
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+          popup.className = 'popup-message';
+      }, 3000);
+  }
+
+  // Check for Django messages and display them
+  {% if messages %}
+      {% for message in messages %}
+          showPopup("{{ message }}", "{{ message.tags }}");
+      {% endfor %}
+  {% endif %}
+</script>
+
+<script>
+  const priceRange = document.getElementById('priceRange');
+  const priceValue = document.getElementById('priceValue');
+
+  priceRange.addEventListener('input', () => {
+    priceValue.textContent = priceRange.value;
+  });
+
+</script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+</html>

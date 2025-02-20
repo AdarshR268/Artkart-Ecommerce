@@ -1,0 +1,787 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Kart- Order Details</title>
+    <link rel="icon" href="{% static 'images/arts.png' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #ffffe4;
+        }
+
+        .navbar {
+            background-color: #ffffe4;
+            padding: 25px;
+            height: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #000000;
+        }
+
+        .logo {
+            font-size: 1.8rem; 
+            color: #000000; 
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+            letter-spacing: 1px; 
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: inherit; 
+            text-decoration: none; 
+        }
+
+        .navbar .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 70px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #000000;
+            text-decoration: underline;
+            transition: text-decoration 0.3s ease;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #000000;
+            margin: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .delivery-address, .order-review {
+            width: 48%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .delivery-address p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .order-review {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stars {
+            margin-bottom: 10px;
+            color: #f0c040;
+            font-size: 20px;
+        }
+
+        .order-review textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .order-review button {
+            background-color: #DEAD6F;
+            color: #000000;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .order-details {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-image img {
+            width: 90px;
+            height: 140px;
+            border-radius: 5px;
+        }
+
+        .product-info {
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+
+        .product-info h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .product-info p {
+            margin: 3px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .order-actions .pending {
+            background-color: transparent;
+            color: #f0a500;
+            padding: 8px 0;
+            font-size: 14px;
+            border: none;
+            cursor: default;
+        }
+
+        .order-actions .cancel-btn {
+            background-color: #e53935;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            .content-wrapper {
+                flex-direction: column;
+            }
+            .delivery-address, .order-review {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .order-details {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .product-image img {
+                width: 80px;
+                height: 120px;
+            }
+        }
+
+        .order-actions .review-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+            margin-top: 40px;
+            width: 100%; 
+        }
+        
+        .order-actions .review-btn:hover {
+            background-color: #45a049;
+        }
+
+        .cancel{
+            padding-top:11px;
+            margin-left: 84px;
+        }
+
+        .cancel-btn {
+            background-color: #968F9F;
+            color: white;
+            border: 2px;
+            padding: 7px 11px;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .cancel-btn:hover{
+            background-color: #687289;
+        }
+
+        .retry-btn {
+            background-color: #FFA500;
+            color: white;
+            border: 2px;
+            padding: 7px 11px;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .retry-btn:hover{
+            background-color: #e88504;
+        }
+
+        .return-btn  {
+            background-color: #DEAD6F;
+            color: black;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .return-btn:hover{
+            background-color: #b38b5b;
+        }
+
+
+        .item-cancel-btn  {
+            background-color: #968F9F;
+            color: black;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .item-cancel-btn:hover{
+            background-color: #687289;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover {
+            color: #000;
+        }
+        
+        .modal-content input[type="number"], .modal-content textarea {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .submit-btn {
+            background-color: #DEAD6F;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c6955c;
+        }
+
+        .download-invoice-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 7px 11px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .download-invoice-btn:hover {
+            background-color: #45a049;
+        }
+        .go {
+            background-color: #DEAD6F; 
+            border: none; 
+            color: white; 
+            padding: 10px 20px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            margin: 4px 2px;
+            cursor: pointer; 
+            border-radius: 5px; 
+            transition: background-color 0.3s; 
+        }
+        
+        .go:hover {
+            background-color: #b38b5b;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 25px 30px;
+            border-radius: 15px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+   
+        .modal-content select{
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .go{
+            cursor: pointer;
+        }
+
+        .original_price {
+            text-decoration: line-through;
+            color: #878787;
+            font-family: math;
+            margin-top: 6px;
+        }
+
+        .original {
+            
+            color: #000000;
+            font-family: math;
+            margin-top: 6px;
+        }
+        .p{
+            font-size:small;
+            margin: 10px;
+        }
+
+        .star-rating {
+            direction: rtl;
+            display: inline-block;
+            font-size: 30px;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            color: #ddd;
+            cursor: pointer;
+        }
+        
+        .star-rating input:checked ~ label,
+        .star-rating input:hover ~ label {
+            color: #FFD700; /* Gold color for the stars */
+        }
+        
+        .star-rating input:hover {
+            color: #FFCC00; /* Hover color */
+        }
+        
+        .star-rating input:checked + label {
+            color: #FFD700; /* Color when checked */
+        }
+        
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    
+
+<!-- Navbar -->
+<div class="navbar">
+
+    <a class="logo" href="{% url 'home'%}">ART KART</a>
+    <div class="nav-center">
+      <ul>
+        <li><a href="{% url 'home'%}">Home</a></li>
+        <li><a href="{% url 'shop'%}">Shop</a></li>
+        <li><a href="{% url 'contact_us'%}">Contact</a></li>
+      </ul>
+    </div>
+    <ul>
+      <li><a href="{% url 'cart'%}">Cart</a></li>
+      <li><a href="{% url 'wishlist'%}">Wishlist</a></li>
+      <li><a href="{% url 'profile'%}">Profile</a></li>
+    </ul>
+</div>
+
+<hr>
+
+<!-- Main Content Section -->
+<a href="{% url 'orders' %}">
+    <button class="go">
+         GO BACK
+    </button>
+</a>
+<div class="container">
+    <!-- Two sections side by side -->
+    <div class="content-wrapper">
+        <div class="delivery-address">
+            <h2>Delivery Address</h2>
+            <p>{{order_address.fullname}},</p>
+            <p>{{order_address.address}},</p>
+            <p>Phone Number: {{order_address.mobile}}</p>
+            <p>City : {{order_address.city}}</p>
+            <p>District : {{order_address.district}}</p>
+            <p>Pincode : {{order_address.pincode}}</p>
+            <p>State : {{order_address.state}}</p>
+        </div>
+
+
+        <div class="order-summary" style="padding-left: 40px;">
+            <h4>TOTAL AMOUNT: ₹{{normal_total_price}}</h4>
+            <br>
+            {% if orders.coupon_name %}
+                <h5 style="margin-top: 0;margin-bottom: 9px;">Coupon Code: {{orders.coupon_name}}</h5>
+                <h5 style="margin-top: 0;">Coupon Percentage: {{orders.coupon_percentage}}%</h5>
+            {% else %}
+                <h5>No coupon used</h5>
+            {% endif %}
+            <h3 style="margin-bottom: 10px;">PAYABLE AMOUNT: ₹{{orders.total_amount}}</h3>
+        </div>
+
+        {% if orders.payment_status == 'Failure' %}
+        <div class="cancel">
+            <a href="{% url 'retry_payment' orders.id %}" >
+                <button class="retry-btn">RETRY PAYMENT</button>
+            </a>
+        </div>
+
+        {% else %}
+
+        <div class="cancel">
+            {% if orders.status == 'Cancelled' %}
+                <button class="cancel-btn" disabled style="background-color: red; cursor: not-allowed;">
+                    ORDER CANCELLED
+                </button>
+                {% elif orders.status != 'Delivered' and orders.status != 'Returned'%}
+                <a href="{% url 'order_cancel' orders.id %}" onclick="return confirmCancelOrder(event, this)">
+                    <button class="cancel-btn">CANCEL ORDER</button>
+                </a>
+            {% else %}
+            {% if orders.status == 'Delivered' or orders.status == 'Returned' %}
+            <button class="download-invoice-btn" onclick="downloadInvoice()">DOWNLOAD INVOICE</button>
+            {% endif %}
+            {% endif %}
+        </div> 
+        {% endif %}
+    </div>
+
+    <!-- Product section below -->
+    {% for item in order_items %}
+    <div class="order-details">
+        <div class="product-image">
+            <img src="{{ item.product.images1.url }}">
+        </div>
+        <div class="product-info">
+            <h2>{{ item.product.product_name }}</h2>
+            <div class="cash">
+                {% if item.offer %}
+                <span class = "original">₹ {{ item.variant.price|floatformat:0 }}</span>
+                <span class="p">Item has offer</span>
+                {% else %}
+                <span class = "original">₹ {{ item.variant.price|floatformat:0 }}</span>
+                {% endif %}
+
+            </div>
+            <p>Frame size: {{ item.variant.frame_size }}</p>
+            <span>Qty: {{item.quantity}}</span>
+        </div>
+
+        <div class="order-actions">
+
+            {% if return_button == 'Deliver_Return' and item.item_status != 'Cancelled' %}
+                {% if item.returns.first.status == 'accepted' %}
+                    <button class="return-btn" disabled style="cursor: not-allowed;">RETURN ACCEPTED</button>
+                {% else %}
+                    <button class="return-btn" onclick="openReturnModal({{ item.id }})">RETURN ITEM</button>
+                    <button class="review-btn">ADD REVIEW</button>
+                {% endif %}
+
+            {% else %}
+
+            {% if orders.payment_status == 'Success' or orders.payment_status == 'Pending' %}
+            {% if item.item_status == 'Cancelled' %}
+            <button class="item-cancel-btn" disabled style="background-color: red; cursor: not-allowed;" >CANCELLED</button>
+            {% else %}
+            <a href="{% url 'item_cancel' orders.id item.id %}" onclick="return confirmCancelOrder(event, this)">
+            <button class="item-cancel-btn"  >CANCEL ITEM</button>
+            </a>
+
+            {% endif %}
+            {% endif %}
+            {% endif %}
+        </div>
+        <!-- Review Modal -->
+
+    <form id="reviewForm" action="{% url 'submit_review' orders.id item.product.id item.variant.id %}" method="POST">
+        {% csrf_token %}
+        <div id="reviewModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>Rate This Product</h3>
+                <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" class="star">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" class="star">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" class="star">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" class="star">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" class="star">&#9733;</label>
+            </div>
+                <h3>Review This Product</h3>
+                <textarea id="reviewText" name='reviewtext' placeholder="Write your review here..."></textarea>
+                <button type= "submit" id="submitReview" class="submit-btn">SUBMIT</button>
+            </div>
+        </div>
+    </form>
+
+     <form id="returnForm-{{ item.id }}" action="{% url 'item_return' orders.id item.id %}" method="POST">
+            {% csrf_token %}
+            <div id="returnModal-{{ item.id }}" class="modal">
+                <div class="modal-content">
+                    <span class="close-return-btn" onclick="closeReturnModal({{ item.id }})">&times;</span>
+                    <h3>Return Item</h3>
+                    <label for="reason">Reason</label>
+                    <select name="reason" id="reason">
+                        <option value="" disabled selected>Select a reason</option>
+                        <option value="damaged">Damaged Product</option>
+                        <option value="wrong_item">Wrong Item Sent</option>
+                        <option value="not_satisfied">Not Satisfied with Product</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label for="request">Request</label>
+                    <select name="request" id="request">
+                        <option value="" disabled selected>Select the request</option>
+                        <option value="request">Request</option>
+                    </select>
+                    <button type="submit" class="submit-btn">SUBMIT RETURN</button>
+                </div>
+            </div>
+        </form>   
+    </div>
+    {% endfor %}
+</div>
+
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function openReturnModal(itemId) {
+        document.getElementById('returnModal-' + itemId).style.display = 'block';
+    }
+    
+    function closeReturnModal(itemId) {
+        document.getElementById('returnModal-' + itemId).style.display = 'none';
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const reviewModal = document.getElementById("reviewModal");
+        const openReviewButtons = document.querySelectorAll(".review-btn");
+        const closeReviewButton = document.querySelector(".close-btn");
+        const submitReviewButton = document.getElementById("submitReview");
+
+        openReviewButtons.forEach(button => {
+            button.onclick = () => {
+                reviewModal.style.display = "block";
+            };
+        });
+
+        closeReviewButton.onclick = () => {
+            reviewModal.style.display = "none";
+        };
+
+        // Close modals if clicked outside the modal content
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+
+        submitReviewButton.onclick = (event) => {
+            const rating = document.getElementById("rating").value;
+            const reviewText = document.getElementById("reviewText").value;
+
+            // Validation: Ensure rating is between 1 and 5
+            if (!rating || rating < 1 || rating > 5) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Rating',
+                    text: 'Please enter a rating between 1 and 5.',
+                });
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+            // Validation: Ensure review text is not empty
+            if (!reviewText.trim()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Review',
+                    text: 'Please write a review before submitting.',
+                });
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Thank you!',
+                text: `Rating: ${rating}\nReview: ${reviewText}`,
+            }).then(() => {
+                reviewModal.style.display = "none"; // Close the modal after submission
+            });
+        };
+    });
+    
+    function downloadInvoice() {
+        const orderId = "{{ orders.id }}";
+        window.location.href = `/download-invoice/${orderId}/`;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Check for Django messages and display them using SweetAlert
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' or message.tags == 'warning' or message.tags == 'error' %}
+                Swal.fire({
+                    icon: "{{ message.tags }}", // Directly uses 'success' or 'warning'
+                    title: "{{ message|escapejs }}",
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'small-alert-popup'
+                    }
+                });
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</script>
+
+<script>
+    function confirmCancelOrder(event, element) {
+      event.preventDefault();  // Prevent the default link behavior
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to cancel this order?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Navigate to the URL if confirmed
+          window.location.href = element.href;
+        }
+      });
+      return false;  // Prevent the default link action
+    }
+  </script>
+
+</body>
+</html>

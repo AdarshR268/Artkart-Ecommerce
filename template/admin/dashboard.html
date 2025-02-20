@@ -1,0 +1,95 @@
+{% extends "admin/sidebar.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="chart-container">
+        <div class="filter-container">
+            <select id="filter" onchange="updateChart()">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+        </div>
+        
+        <canvas id="salesChart"></canvas>
+
+        <div class="info-section">
+            <div class="info-box">
+                <div class="title">Total Sales Count</div>
+                <div class="value" id="total-sales">0</div>
+            </div>
+            <div class="info-box">
+                <div class="title">Total Amount</div>
+                <div class="value" id="total-amount">₹0.00</div>
+            </div>
+        </div>
+
+        <div class="top-selling-section">
+            <h2>Top Selling Products</h2>
+            <table class="top-selling-table">
+                <thead>
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Product Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in top_selling_products %}
+                        <tr>
+                            <td>{{ product.product__id }}</td>
+                            <td>{{ product.product__product_name }}</td>
+                            <td>{{ product.product__art_category__art_type }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No top-selling products available.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let chart;
+    const ctx = document.getElementById('salesChart').getContext('2d');
+
+    function createChart(data, labels) {
+        if (chart) chart.destroy();
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Sales',
+                    data: data,
+                    borderColor: '#0984e3',
+                    fill: false,
+                }]
+            },
+            options: { responsive: true }
+        });
+    }
+
+    function updateChart() {
+        const filter = document.getElementById('filter').value;
+        fetch("{% url 'get_sales_data' %}?filter=" + filter)
+            .then(response => response.json())
+            .then(data => {
+                createChart(data.data, data.labels);
+                document.getElementById('total-sales').textContent = data.total_sales_count;
+                document.getElementById('total-amount').textContent = `₹${parseFloat(data.total_amount).toFixed(2)}`;
+            })
+            .catch(error => console.error('Error fetching sales data:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', updateChart);
+</script>
+
+{% endblock %}

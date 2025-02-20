@@ -1,0 +1,791 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="icon" href="{% static 'images/arts.png' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+
+        body{
+            background-color:#ffffe4
+        }
+  
+        .navbar {
+          height: 80px; 
+          display: flex; 
+          align-items: center;
+        
+          }
+  
+          .logo {
+          font-size: 1.8rem; 
+          color: #000000; 
+          font-weight: bold;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+          letter-spacing: 1px; 
+          text-decoration: none;
+          }
+  
+          /* Nav Links */
+          .navbar-nav .nav-link {
+          font-size: 1.3rem;
+          color: #000000;
+          padding: 10px;
+          transition: color 0.3s;
+          }
+  
+          .navbar-nav .nav-link {
+              position: relative;
+              text-decoration: none; 
+          }
+          
+          .navbar-nav .nav-link::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 0;
+              height: 1px;
+              background-color: #000;
+              transition: width 0.5s ease; 
+          }
+          
+          .navbar-nav .nav-link:hover::after {
+              width: 100%;
+          }
+          
+          .navbar-nav .nav-item {
+          margin: 0 15px; 
+          }
+  
+          /* Toggler Button */
+          .navbar-toggler {
+          padding: 0.5rem;
+          }
+  
+          .navbar-toggler-icon {
+          width: 30px;
+          height: 30px;
+          }
+  
+          /* Responsive Design */
+          @media (max-width: 992px) {
+          .navbar {
+          height: auto; 
+          padding: 10px;
+          }
+  
+          .navbar-nav {
+          flex-direction: column; 
+          }
+  
+          .navbar-nav .nav-item {
+          margin: 10px 0;
+          }
+  
+          .navbar-collapse {
+          justify-content: center; 
+          }
+          }
+  
+          @media (max-width: 576px) {
+          .navbar-nav .nav-link {
+          font-size: 1.1rem;
+          }
+          }
+
+        .product-container {
+          display: flex;
+          justify-content: space-between;
+          padding: 30px;
+          margin: 30px auto;
+          background-color: #fff;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          max-width: 1200px;
+        }
+
+        .product-images {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 10px;
+        }
+
+        /* Main Product Image */
+        .product-images img#main-image {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            cursor: crosshair;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .thumbnail-images img {
+            width: 60px;
+            margin: 0 5px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border 0.3s;
+        }
+
+        .thumbnail-images img:hover {
+            border: 2px solid #007bff;
+        }
+
+        .product-details {
+            flex: 1.5;
+            padding: 20px;
+            margin-left: 20px;
+        }
+
+        .product-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .short-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .short-description ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .size-options select {
+            padding: 10px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+           
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .product-actions button {
+            padding: 15px 30px;
+            margin: 5px 10px 12px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .buy-now {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .buy-now:hover {
+            background-color: #218838;
+        }
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .add-to-wishlist {
+          background: linear-gradient(135deg, #ff7e5f, #feb47b);
+          color: white;
+      }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+        .go-to-cart {
+          background-color: #FFD300;
+          color: #000000;
+      }
+
+      .go-to-cart:hover {
+          background-color: #e0b800;
+      }
+
+        .related-products {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .related-products h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .related-product-list {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .related-product {
+            text-align: center;
+            margin: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .related-product img {
+            width: 180px;
+            height: 180px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .related-product:hover {
+            transform: scale(1.05);
+        }
+
+        /* Magnifier Lens Styles */
+        .img-magnifier-glass {
+            position: absolute;
+            border: 3px solid #000;
+            border-radius: 50%;
+            cursor: none;
+            /* Size of the magnifier glass: */
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 0 5px #000;
+            display: none; 
+        }
+
+        .size-options {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sizes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .size-box {
+            display: inline-block;
+            width: 65px;
+            height: 35px;
+            background-color: #f0f0f0; 
+            border: 1px solid #ccc;
+            text-align: center; 
+            line-height: 30px; 
+            font-size: 14px; 
+            text-decoration: none;
+            color: #000000; 
+            border-radius: 5px; 
+            transition: background-color 0.3s ease;
+        }
+        
+        .size-box:hover {
+            background-color: #ddd; 
+        }
+        
+      .reviews-section h3 {
+          font-size: 1.5em;
+          margin-bottom: 15px;
+          color: #333;
+      }
+  
+      .review-item {
+          background-color: #ffffff;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          padding: 10px;
+          margin-bottom: 3px;
+          
+      }
+  
+      .review-item p {
+          margin: 5px 0;
+      }
+  
+      .review-item strong {
+          font-size: 1.1em;
+          color: #555;
+      }
+  
+      .review-rating {
+          color: #f7ba20 /* Gold color for stars */
+      }
+  
+      .view-more-reviews {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 5px 7px;
+          font-size: 1em;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+  
+      .view-more-reviews:hover {
+          background-color: #0056b3;
+      }
+      #no{
+        font-size: larger;
+        margin-left: 190px;
+      }
+      /* Popup styles */
+        .popup-message {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FFDE21; /* Green color for success */
+            color: #000000;
+            padding: 20px 35px;
+            border-radius: 6px;
+            z-index: 1000;
+            transition: top 0.5s ease-in-out;
+            box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+        .popup-error {
+            background-color: #f44336; 
+        }
+        .popup-warning {
+            background-color: #ff9800; 
+        }
+        .popup-show {
+            top: 25px;
+        }
+
+        .offer-percentage {
+          position: absolute;
+          top: 15px; 
+          left: 15px; 
+          background-color: rgba(255, 0, 0, 0.8);
+          color: white;
+          padding: 10px 15px;
+          border-radius: 10px;
+          font-weight: bold;
+          font-size: 1.2em; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+          transition: transform 0.3s ease; 
+          z-index: 10; 
+      }
+      
+      .offer-percentage:hover {
+          transform: scale(1.1);
+      }
+
+      .price {
+        font-size: 1.2em;
+        display: flex;
+        gap: 10px;
+      }
+    
+      .original-price {
+        text-decoration: line-through;
+        color: #878787;
+        font-family: math;
+        margin-top: 6px;
+    }
+
+      
+      .offer-price {
+        font-size: x-large;
+        color: #000000; /* Set to a green color */
+        font-weight: bold;
+      }
+
+      .original {
+        font-size: x-large;
+        color: #000000;
+        font-weight: bold;
+      }
+
+      
+
+      #price {
+        margin-top: 11px;
+        margin-bottom: 1rem;
+        font-size: small;
+      }
+      .breadcrumb {
+        font-size: 14px;
+        color: #000000;
+        margin-top: 25px;
+        margin-bottom: 40px;
+        margin-left: 20px;
+      }
+
+      .breadcrumb a {
+        text-decoration: none;
+        color: #000000;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      .breadcrumb span {
+        font-weight: bold;
+        color: #000;
+      }
+      .out{
+        color: red;
+        
+
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMKtkz0p5sy4R8l1L4/fC1RfwD1kLwL4RbfE8" crossorigin="anonymous">
+
+</head>
+<body>
+
+  <div id="popup-message" class="popup-message"></div>
+     <!-- Navbar Start -->
+     <nav class="navbar navbar-expand-lg ">
+      <div class="container-fluid">
+        <!-- Left Logo Section -->
+        <a class="logo" href="{% url 'home'%}">ART KART</a>
+    
+        <!-- Toggler Button -->
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- Collapsible Content -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Center Links -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'home'%}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'shop'%}">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about_us'%}">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact_us'%}">Contact</a>
+            </li>
+            {% if not customer %}
+            <li class="nav-item">
+              <a class="nav-link slow-underline" href="{% url 'signup' %}">Signup</a>
+            </li>
+            {% endif %}
+          </ul>
+    
+          <!-- Right Section (Cart, Wishlist, User) -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cart'%}"><i class="bi bi-cart"></i> Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'wishlist'%}"><i class="bi bi-heart"></i> Wishlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile'%}"><i class="bi bi-person"></i> Profile</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <!-- Navbar End -->
+  <hr>
+
+  <!-- Simple Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="{% url "home" %}">Home</a> /
+    <a href="{% url "shop" %}">Shop</a> /
+    <a href="#"><span>Product</span></a>
+  </nav>
+
+  <div class="product-container">
+    <div class="product-images">
+      <div class="zoom-container">
+          <img id="main-image" src="{{ product.images1.url }}" alt="Main Product Image">
+          <div id="magnifier-glass" class="img-magnifier-glass"></div>
+      </div>
+      
+      <!-- Span to display the offer percentage -->
+
+      {% if offer_display != "0% OFF" %}
+      <span class="offer-percentage" style="position: absolute; top: 20px; left: 20px; background-color: rgba(255, 0, 0, 0.7); color: white; padding: 5px; border-radius: 5px;">
+        {{ offer_display }}
+      </span>
+      {% endif %}
+  
+      <div class="thumbnail-images">
+          <img src="{{ product.images1.url }}" alt="Thumbnail 1" onclick="changeImage(this)">
+          <img src="{{ product.images2.url }}" alt="Thumbnail 1" onclick="changeImage(this)">
+          <img src="{{ product.images3.url }}" alt="Thumbnail 2" onclick="changeImage(this)">
+      </div>
+  </div>
+    <div class="product-details">
+        <h2 class="product-title">{{ product.product_name }}</h2>
+        {% if offer_amount %}
+        <div class="price">
+          <span class="offer-price">₹{{ offer_amount|floatformat:0 }}</span>
+          <span class="original-price">₹{{ variant_amount|floatformat:0 }}</span>
+          <p id='price'>offer price</p>
+        </div>
+        {% else %}
+
+        <div class="price">
+          <span class="original">₹{{ variant_amount|floatformat:0 }}</span>
+        </div>
+
+        {% endif %}
+
+        <h6>SELECTED SIZE : {{ variant.frame_size }} </h6>
+
+        <div class="size-options">
+            <label for="sizes">Available sizes (inches):</label>
+            <div class="sizes-container">
+                {% for size in sizes %}
+                <a href="{% url 'single' product.id size.id %}" class="size-box">{{ size.frame_size }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div>
+            <p></p>
+        </div>
+        <div class="product-actions">
+          {% if variant.stock == 0 %}
+              <h3 class="out">OUT OF STOCK</h3>
+          {% elif in_cart %}
+          <a href="{% url 'cart' %}"><button class="go-to-cart">Go to cart</button></a>
+          {% else %}
+              <a href="{% url 'addcart' product.id variant.id %}"><button class="add-to-cart">Add to Cart</button></a>
+              
+          {% endif %}
+          {% if in_wishlist %}
+          <a href="{% url 'wishlist' %}"><button class="go-to-cart">Go to Wishlist</button></a>
+          {% else %}
+          <a href="{% url 'add_wishlist_single' product.id variant.id  %}"><button class="add-to-wishlist">Add to Wishlist</button></a>
+          {% endif %}
+
+          <h6>STOCK: {{variant.stock}}</h6>
+      </div>
+      
+
+        <br>
+
+        <p class="short-description">
+            <strong>About this product</strong><br>
+            <h6>{{ product.description }}</h6><br>
+            <h6>PAINT TYPE : {{ product.paint_category.paint_type }}</h6>
+            <h6>ART TYPE : {{ product.art_category.art_type }}</h6><br>
+        </p>  
+        <h4>REVIEWS</h4>
+        {% if reviews %}
+        <div class="reviews-section">
+            {% for review in reviews|slice:":3" %}
+            <div class="review-item">
+              
+                
+                <p>{{ review.review }}- <span class="review-rating">⭐ {{ review.rating }}/5</span></p>
+                <p>{{ review.user.username }} -- / {{ review.created_at|date:"d-m-y"}}</p>
+            </div>
+            {% endfor %}
+    
+            {% if reviews|length > 3 %}
+            <button onclick="toggleReviews()" class="view-more-reviews">View More Reviews</button>
+            <div id="additional-reviews" style="display: none;">
+                {% for review in reviews|slice:"3:" %}
+                <div class="review-item">
+                  
+                  <p>{{ review.review }}- <span class="review-rating">⭐ {{ review.rating }}/5</span></p>
+                  <p>{{ review.user.username }} - / {{ review.created_at|date:"d-m-y"}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% else %}
+        <h5 id = "no">No reviews</h5>
+        {% endif %}
+    </div>
+</div>
+
+<div class="related-products">
+    <h3>Related Products</h3>
+    <div class="related-product-list">
+      {% for related in related_product %}
+        <div class="related-product">
+            <img src="{{related.images1.url}}"alt="Related Product 1">
+            <h6>{{related.product_name}}</h6>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+  <!-- Footer Section Start -->
+<footer class="bg-dark text-white mt-5 pt-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>About Us</h5>
+          <p>We are a team dedicated to providing the best products and services for our customers.</p>
+          <p>&copy; 2025 Artkart</p>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 text-end">
+          <h5 class="mt-4">Follow Us</h5>
+          <div>
+            <a href="https://www.youtube.com/" class="text-white me-2"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/_art_kart/" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer Section End -->
+  
+  <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMKtkz0p5sy4R8l1L4/fC1RfwD1kLwL4RbfE8" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        function changeImage(thumbnail) {
+            const mainImage = document.getElementById('main-image');
+            const magnifierGlass = document.getElementById('magnifier-glass');
+            mainImage.src = thumbnail.src;
+            magnifierGlass.style.backgroundImage = `url(${thumbnail.src})`;
+        }
+
+        function magnify(imgID, zoom) {
+            const img = document.getElementById(imgID);
+            const magnifierGlass = document.getElementById("magnifier-glass");
+            let w, h, bw;
+
+            magnifierGlass.style.backgroundImage = `url(${img.src})`;
+            magnifierGlass.style.backgroundRepeat = "no-repeat";
+            magnifierGlass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+
+            img.addEventListener("mousemove", moveMagnifier);
+            magnifierGlass.addEventListener("mousemove", moveMagnifier);
+            img.addEventListener("touchmove", moveMagnifier);
+            magnifierGlass.addEventListener("touchmove", moveMagnifier);
+
+            function moveMagnifier(e) {
+                let pos, x, y;
+                e.preventDefault();
+                pos = getCursorPos(e);
+                x = pos.x;
+                y = pos.y;
+
+                if (x > img.width - (magnifierGlass.offsetWidth / 2)) x = img.width - (magnifierGlass.offsetWidth / 2);
+                if (x < magnifierGlass.offsetWidth / 2) x = magnifierGlass.offsetWidth / 2;
+                if (y > img.height - (magnifierGlass.offsetHeight / 2)) y = img.height - (magnifierGlass.offsetHeight / 2);
+                if (y < magnifierGlass.offsetHeight / 2) y = magnifierGlass.offsetHeight / 2;
+
+                magnifierGlass.style.left = (x - magnifierGlass.offsetWidth / 2) + "px";
+                magnifierGlass.style.top = (y - magnifierGlass.offsetHeight / 2) + "px";
+                magnifierGlass.style.backgroundPosition = "-" + ((x * zoom) - magnifierGlass.offsetWidth / 2) + "px -" + ((y * zoom) - magnifierGlass.offsetHeight / 2) + "px";
+                magnifierGlass.style.display = "block";
+            }
+        
+            function getCursorPos(e) {
+                let a, x = 0, y = 0;
+                e = e || window.event;
+                a = img.getBoundingClientRect();
+
+                x = e.pageX - a.left;
+                y = e.pageY - a.top;
+                x = x - window.pageXOffset;
+                y = y - window.pageYOffset;
+
+                return { x: x, y: y };
+            }
+
+            img.onmouseout = function () {
+                magnifierGlass.style.display = "none";
+            }
+        }
+        magnify("main-image", 2);
+
+    </script>
+    
+
+<script>
+    // Check for Django messages and display them using SweetAlert
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' or message.tags == 'warning' %}
+                Swal.fire({
+                    icon: "{{ message.tags }}", // Directly uses 'success' or 'warning'
+                    title: "{{ message|escapejs }}",
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'small-alert-popup'
+                    }
+                });
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</script>
+    <script>
+      function toggleReviews() {
+          var reviews = document.getElementById("additional-reviews");
+          var button = document.querySelector(".view-more-reviews");
+          if (reviews.style.display === "none") {
+              reviews.style.display = "block";
+              button.textContent = "View Less Reviews";
+          } else {
+              reviews.style.display = "none";
+              button.textContent = "View More Reviews";
+          }
+      }
+      </script>
+</body>
+</html>
